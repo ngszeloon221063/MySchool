@@ -23,13 +23,18 @@
 
   const hamburger = document.querySelector(".hamburger");
   const navMenu = document.querySelector(".menu-list");
-
+  const navbar = document.getElementById(".navbar");
+  const mobileDropdown = document.querySelector('.stellarnav.mobile ul');
+  
   hamburger.addEventListener("click", mobileMenu);
 
   function mobileMenu() {
-      hamburger.classList.toggle("active");
-      navMenu.classList.toggle("responsive");
-  }
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("responsive");
+    if (mobileDropdown) {
+      mobileDropdown.style.backgroundColor = "orangered";
+    }
+}
 
   const navLink = document.querySelectorAll(".nav-link");
 
@@ -38,12 +43,13 @@
   function closeMenu() {
       hamburger.classList.remove("active");
       navMenu.classList.remove("responsive");
+      navbar.style.backgroundColor = "grey";
   }
 
   var initScrollNav = function() {
     var scroll = $(window).scrollTop();
 
-    if (scroll >= 200) {
+    if (scroll >= 600) {
       $('#header').addClass("fixed-top");
     }else{
       $('#header').removeClass("fixed-top");
@@ -56,6 +62,11 @@
 
   $(document).ready(function(){
     initScrollNav();
+    document.querySelectorAll('.stellarnav ul ul').forEach(dropdown => {
+      dropdown.style.backgroundColor = 'orangered ';
+    });
+
+    
     
     Chocolat(document.querySelectorAll('.image-link'), {
         imageSize: 'contain',
@@ -81,8 +92,8 @@
     });
 
     $('.main-slider').slick({
-        autoplay: false,
-        autoplaySpeed: 4000,
+        autoplay: true,
+        autoplaySpeed: 1,
         fade: true,
         dots: true,
         prevArrow: $('.prev'),
